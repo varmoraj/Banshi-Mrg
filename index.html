@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<title>Wedding WhatsApp Invite</title>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<style>
+body{font-family:sans-serif;background:#f5f5f5;padding:20px}
+.box{max-width:800px;margin:auto;background:white;padding:20px;border-radius:10px}
+input,button{width:100%;padding:10px;margin:6px 0}
+button{background:#1e293b;color:white;border:none;border-radius:6px}
+.row{padding:6px;border-bottom:1px solid #ddd}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h2>💍 Wedding WhatsApp Invitation</h2>
+
+<label>Upload Excel (A=Name, B=Number, C=Invitation Type)</label>
+<input type="file" id="excel" accept=".xlsx">
+
+<label>Date & Day</label>
+<input id="dateDay" placeholder="તા. 20-01-2026, મંગળવાર">
+
+<label>Likhtan</label>
+<input id="likhtan">
+
+<label>Venue</label>
+<input id="venue">
+
+<label>Map Link</label>
+<input id="mapLink">
+
+<label>PDF Link</label>
+<input id="pdfLink">
+
+<button onclick="generate()">Generate WhatsApp Links</button>
+
+<div id="list"></div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
