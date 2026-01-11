@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Digital Kankotri – WhatsApp Sender</title>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+<style>
+body{font-family:sans-serif;background:#f1f5f9;padding:20px}
+.box{background:white;max-width:900px;margin:auto;padding:20px;border-radius:10px}
+input,button{width:100%;padding:10px;margin:6px 0;font-size:14px}
+button{background:#1e293b;color:white;border:none;border-radius:6px;cursor:pointer}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+td,th{border:1px solid #ddd;padding:8px;font-size:13px}
+.sent{background:#dcfce7}
+.pending{background:#fef9c3}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>💍 Digital Kankotri – WhatsApp Invitation</h2>
+
+<label>Excel Upload (A=Name, B=Number, C=Invitation Type)</label>
+<input type="file" id="excel" accept=".xlsx">
+
+<input id="dateDay" placeholder="તા. 20-01-2026, મંગળવાર">
+<input id="likhtan" placeholder="શ્રી ભગવાનજીભાઈ નાનજીભાઈ વરમોરા & શ્રીમતી ભાવનાબેન">
+<input id="venue" placeholder="Imperial Party Lawns (SP Road)">
+<input id="mapLink" placeholder="https://maps.app.goo.gl/PDALZHJzZpgkvguR6">
+
+<button onclick="generate()">Generate Guest List</button>
+
+<div id="stats" style="margin:10px 0;font-weight:bold;"></div>
+
+<table id="table">
+<tr>
+<th>#</th>
+<th>Name</th>
+<th>Number</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</table>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
