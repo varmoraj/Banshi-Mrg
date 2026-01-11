@@ -20,8 +20,7 @@
 {{LIKHTAN}}
 
 
-:શુભ સ્થળ:
-{{VENUE}}
+:શુભ સ્થળ:{{VENUE}}
 Imperial Party Lawns (SP Road)
 https://maps.app.goo.gl/PDALZHJzZpgkvguR6
 {{MAP_LINK}}
