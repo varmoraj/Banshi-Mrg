@@ -1,28 +1,15 @@
 let guests=[];
+let templateText="";
 
-const template = `સ્નેહી શ્રી :
-*{{NAME}}*
-
-જીવનના સૌથી પવિત્ર અને સ્મરણિય પળોમાંથી એક ક્ષણ
-અમારા પરિવારના આંગણે આવી રહી છે…
-
-વરમોરા પરિવારની લાડકી દીકરી *બંસી (ગોપી)*
-તા. *20-01-2026, મંગળવાર* ના રોજ
-તેના લગ્નજીવન તરફ પાવન પગલું મૂકવા જઈ રહી છે.
-
-આ પાવન લગ્નોત્સવના રીસેપ્શન પ્રસંગે *{{INVITATION_TYPE}}* ને પધારવા,
-હાર્દિક નિમંત્રણ પાઠવીએ છીએ.
-
-:શુભ સ્થળ:
-Imperial Party Lawns
-https://maps.app.goo.gl/PDALZHJzZpgkvguR6
-
-ઇન્વિટેશન મળતા OK નો મેસેજ કરશો.`;
+/* Load Template */
+fetch("template.txt",{cache:"no-store"})
+.then(r=>r.text())
+.then(t=>{ templateText=t; updatePreview(); });
 
 function applyVars(g){
- return template
- .replace("{{NAME}}", g.name)
- .replace("{{INVITATION_TYPE}}", g.type);
+ return templateText
+ .replace("{{NAME}}", g?.name||"")
+ .replace("{{INVITATION_TYPE}}", g?.type||"");
 }
 
 /* Excel Upload */
@@ -44,14 +31,13 @@ function addManual(){
  const name=mName.value.trim();
  const number=mNumber.value.trim();
  const type=mType.value.trim();
-
- if(!name || number.length!==10){alert("Valid data નાખો");return;}
-
+ if(!name || number.length!==10){alert("Valid details નાખો");return;}
  guests.push({name,number,type,sent:false});
  mName.value=mNumber.value=mType.value="";
  render();
 }
 
+/* Render Table */
 function render(){
  table.innerHTML=`<tr>
 <th>#</th><th>Name</th><th>Mobile</th>
@@ -59,17 +45,18 @@ function render(){
 </tr>`;
  guests.forEach((g,i)=>{
  table.innerHTML+=`
- <tr id="r${i}">
+ <tr class="${g.sent?"sent":""}">
  <td>${i+1}</td><td>${g.name}</td><td>${g.number}</td>
  <td>${g.type}</td>
  <td>${g.sent?"Sent":"Pending"}</td>
  <td><button onclick="send(${i})">Send</button></td>
  </tr>`;
  });
- updatePreview();
  updateStats();
+ updatePreview();
 }
 
+/* Send WhatsApp */
 function send(i){
  const g=guests[i];
  const msg=applyVars(g);
@@ -78,11 +65,13 @@ function send(i){
  render();
 }
 
+/* Preview */
 function updatePreview(){
  if(guests[0])
- preview.textContent=applyVars(guests[0]);
+  preview.textContent=applyVars(guests[0]);
 }
 
+/* Stats */
 function updateStats(){
  stats.innerText=`Total: ${guests.length} | Sent: ${guests.filter(g=>g.sent).length}`;
 }
