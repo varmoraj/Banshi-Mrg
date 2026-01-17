@@ -3,19 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Digital Kankotri</title>
+
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
 <style>
 body{font-family:sans-serif;background:#f1f5f9;padding:20px}
 .wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .box{background:white;padding:15px;border-radius:10px}
-input,button{width:100%;padding:8px;margin:5px 0}
+input,select,textarea,button{width:100%;padding:8px;margin:5px 0}
 button{background:#1e293b;color:white;border:none;border-radius:6px}
 .preview{background:#e5ddd5;padding:10px;border-radius:10px}
 .bubble{background:#dcf8c6;padding:10px;border-radius:10px;white-space:pre-wrap}
 table{width:100%;border-collapse:collapse;margin-top:10px}
 td,th{border:1px solid #ddd;padding:6px;font-size:13px}
 .sent{background:#dcfce7}
+hr{margin:15px 0}
 </style>
 </head>
 
@@ -23,34 +25,51 @@ td,th{border:1px solid #ddd;padding:6px;font-size:13px}
 
 <div class="wrap">
 
+<!-- LEFT -->
 <div class="box">
-<h3>Guest Manager</h3>
 
-<h4>Manual Entry</h4>
+<h3>Template Editor</h3>
+<textarea id="templateBox" rows="10"></textarea>
+
+<hr>
+
+<h3>Manual Guest Entry</h3>
 <input id="mName" placeholder="Guest Name">
 <input id="mNumber" placeholder="Mobile Number">
-<input id="mType" placeholder="Invitation Type">
+
+<select id="mType">
+  <option value="સહ પરિવાર">સહ પરિવાર</option>
+  <option value="આપ શ્રી બંને">આપ શ્રી બંને</option>
+  <option value="આપ શ્રી">આપ શ્રી</option>
+</select>
+
 <button onclick="addManual()">➕ Add Guest</button>
 
 <hr>
 
-<h4>Excel Upload</h4>
+<h3>Excel Upload</h3>
 <input type="file" id="excel" accept=".xlsx">
 
-<div id="stats"></div>
+<div id="stats" style="margin-top:10px;font-weight:bold"></div>
 
 <table id="table">
 <tr>
-<th>#</th><th>Name</th><th>Mobile</th>
-<th>Invite Type</th><th>Status</th><th>Send</th>
+<th>#</th>
+<th>Name</th>
+<th>Mobile</th>
+<th>Invite Type</th>
+<th>Status</th>
+<th>Send</th>
 </tr>
 </table>
+
 </div>
 
+<!-- RIGHT -->
 <div class="box">
 <h3>WhatsApp Live Preview</h3>
 <div class="preview">
-<div class="bubble" id="preview"></div>
+  <div class="bubble" id="preview"></div>
 </div>
 </div>
 
